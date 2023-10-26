@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -16,6 +17,19 @@ import logo from '../logo/EZAMAZWE-LOGO.png'
 const defaultTheme = createTheme();
 
 export default function ResetPasswordCMS() {
+
+    const [message, setMessage] = useState("");
+    const [email, setEmail] = useState(null);
+
+    useEffect(() => {
+        if (email) {
+            setMessage("");
+        } else {
+            setMessage("# email address is required");
+        }
+    }, []);
+
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -24,6 +38,8 @@ export default function ResetPasswordCMS() {
             password: data.get('password'),
         });
     };
+
+
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -87,12 +103,14 @@ export default function ResetPasswordCMS() {
                                     required
                                     fullWidth
                                     name="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     autoComplete="email"
                                     autoFocus
                                     sx={{ borderRadius: 10, width: '456px', height: '113px' }}
                                 />
                                 <Typography sx={{ mt: -7, color: 'red' }}>
-                                    # email address is required
+                                    {message}
                                 </Typography>
                             </Box>
 
@@ -103,10 +121,10 @@ export default function ResetPasswordCMS() {
                                             display: 'flex',
                                             alignItems: 'center',
                                             justifyContent: 'center',
-                                            mt: 2, ml:5, mr: 5,
+                                            mt: 2, ml: 5, mr: 5,
                                             width: '400px'
                                         }}>
-                                        <Typography sx={{textAlign:'center'}}>
+                                        <Typography sx={{ textAlign: 'center' }}>
                                             You will receive a reset password link in your
                                             email if provided email is recognized.
                                         </Typography>
