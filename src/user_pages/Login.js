@@ -5,10 +5,13 @@ import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
+import { useTheme } from '@mui/material';
 
 
 function Login() {
+
     const [open, setOpen] = useState(false);
+    const theme = useTheme();
 
     const handleOpen = () => {
         setOpen(true);
@@ -26,12 +29,15 @@ function Login() {
             <Dialog
                 open={open}
                 onClose={handleClose}
+                sx={{
+                    borderRadius: '20px',
+                }}
             >
-                <DialogTitle component='h1' variant='h4' sx={{ textAlign: 'center', mt: 5 }}>
+                <DialogTitle component='h1' variant='h4' sx={{ textAlign: 'center', mt: 3 }}>
                     EZAMAZWE EDUTECH
                 </DialogTitle>
 
-                <DialogContent>
+                <DialogContent sx={{ height: '360px' }}>
 
                     <Typography sx={{ textAlign: 'center', mt: 0, mb: 2, fontWeight: 400, fontSize: '20px', lineHeight: '30px' }}>
                         Login to your account
@@ -50,7 +56,7 @@ function Login() {
                             sx={{ borderRadius: 10, width: '456px', height: '113px' }}
                         />
                         <Typography sx={{ mt: -7, color: 'red' }}>
-                            # email address is invalid
+                            * email address is invalid
                         </Typography>
                     </Box>
 
@@ -81,14 +87,25 @@ function Login() {
                         </Box>
                     </Grid>
                 </Grid>
-                <DialogActions>
-                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <DialogActions sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Box>
                         <Button
                             onClick={handleClose}
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 5, mb: 5, borderRadius: 30, backgroundColor: '#1C3F53', width: '455px', height: '55px' }}>
+                            sx={{
+                                mt: 5, mb: 5,
+                                borderRadius: 30,
+                                backgroundColor: '#1C3F53',
+                                width: '300px',     // Default width for larger screens
+                                height: '55px',
+                                [theme.breakpoints.down('sm')]: {
+                                    // Use 456px width on screens smaller or equal to 'sm' breakpoint
+                                    width: '456px',
+                                },
+                            }}
+                        >
                             SIGN IN
                         </Button>
                     </Box>

@@ -10,12 +10,16 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { InputLabel } from '@mui/material';
 import logo from '../logo/EZAMAZWE-LOGO.png'
+import { useTheme } from '@mui/material';
 
 
 
 const defaultTheme = createTheme();
 
 export default function LoginCMS() {
+
+    const theme = useTheme();
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -67,10 +71,10 @@ export default function LoginCMS() {
                             flexDirection: 'column',
                             alignItems: 'center',
                             backgroundColor: 'white',
-                            borderRadius: '10px'
+                            borderRadius: '20px'
                         }}
                     >
-                        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 2, mb: 2 }}>
                             <Typography component='h1' variant='h4' sx={{ textAlign: 'center', mt: 5, mb: 5 }}>
                                 EZAMAZWE EDUTECH
                             </Typography>
@@ -79,7 +83,7 @@ export default function LoginCMS() {
                                 Login to your account
                             </Typography>
 
-                            <Box sx={{ mt: 5, ml:5 }}>
+                            <Box sx={{ mt: 5, ml: 5 }}>
                                 <InputLabel htmlFor="my-input">Email address</InputLabel>
                                 <TextField
                                     id="outlined-basic"
@@ -92,7 +96,7 @@ export default function LoginCMS() {
                                     sx={{ borderRadius: 10, width: '456px', height: '113px' }}
                                 />
                                 <Typography sx={{ mt: -7, color: 'red' }}>
-                                    # email address is invalid
+                                    * email address is invalid
                                 </Typography>
                             </Box>
 
@@ -109,24 +113,33 @@ export default function LoginCMS() {
                                     sx={{ borderRadius: 20, width: '456px', height: '113px' }}
                                 />
                                 <Typography sx={{ mt: -7, color: 'red' }}>
-                                    # email address is required
+                                    * email address is required
                                 </Typography>
                             </Box>
-                            <Grid container>
-                                <Grid item xs>
-                                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: -1, mr: 5 }}>
-                                        <Link href="#" variant="body2">
-                                            Forgot password?
-                                        </Link>
-                                    </Box>
-                                </Grid>
-                            </Grid>
+
+                            <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: -1, mr: 5 }}>
+                                <Link href="#" variant="body2">
+                                    Forgot password?
+                                </Link>
+                            </Box>
+
                             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                 <Button
                                     type="submit"
                                     fullWidth
                                     variant="contained"
-                                    sx={{ mt: 5, mb: 5, borderRadius: 30, backgroundColor: '#1C3F53', width: '455px', height: '55px' }}>
+                                    sx={{
+                                        mt: 5, mb: 5,
+                                        borderRadius: 30,
+                                        backgroundColor: '#1C3F53',
+                                        width: '300px',     // Default width for larger screens
+                                        height: '55px',
+                                        [theme.breakpoints.down('sm')]: {
+                                            // Use 85% width on screens smaller or equal to 'sm' breakpoint
+                                            width: '85%',
+                                        },
+                                    }}
+                                >
                                     SIGN IN
                                 </Button>
                             </Box>
